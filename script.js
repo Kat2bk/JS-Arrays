@@ -31,15 +31,39 @@ const inventors = [
         }
     })
     console.log(fifteenHundreds)
-    // console.table is useful
 
 
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
+    const inventorMap = inventors.map(person => {
+        return person.first + " " + person.last 
+        // return `${person.first} ${person.last}`
+    })
+
+    console.log(inventorMap)
+
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    // sort gives you two arguements to use, (a) and (b)... it converts elements into 
+    // strings then compares them to their UTF-16 unit values. All undefined
+    // is sorted to the end of an array. it returns positions based on -1 or 1
+
+    // Because, when we do a-b, if a > b then it returns number > 0. 
+    // If a<b, then it returns < 0. When a=b , then it returns 0.
+    // To sort numbers in Descending Order, just change the a-b to b-a .
+
+  const sortInventors = inventors.sort(function(old, young) {
+      if (old.year > young.year) {
+          return 1;
+      } else {
+          return -1;
+      }
+  })
+
+    console.table(sortInventors)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
