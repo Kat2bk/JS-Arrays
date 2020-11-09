@@ -63,20 +63,95 @@ const inventors = [
       }
   })
 
+  // or inventors.sort(old, young => old.year > young.year ? 1 : -1);
+
     console.table(sortInventors)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    //total (accumulator) is like setting an empty array that adds everything into it
+    // currentValue is the loop you set, where you can add or subtract everything together
+    const reduceInvestors = inventors.reduce((total, currentValue) => {
+        return total + (currentValue.passed - currentValue.year);
+    }, 0)
+
+    // must add zero at end
+
+    console.log(reduceInvestors)
+
     // 5. Sort the inventors by years lived
+    // pesedo code ---
+    // we are comparing one inventor to the other
+    // set up variables for a and b 
+    // years lived means subtracted years
+    // create an if statement... if a is bigger than b 
+    // return 1 else -1 
+
+    const sortYears = inventors.sort((a, b) => {
+        const firstInventor = a.passed - a.year;
+        const secondInventor = b.passed - b.year;
+
+        if (firstInventor > secondInventor) {
+            return -1;
+        } else {
+            return 1;
+        }
+    })
+
+    console.table(sortYears)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    const category = document.querySelector('.mw-category');
+    // const links = Array.from(category.querySelectorAll('a'));
+    // let findDe = links.map(link => link.textContent).filter(boulevard => boulevard.includes("de"));
+
+
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    // pesudo-code ---
+    // we want to go through the list and return the list
+    // const lastNamesList = inventors.map(names => {
+    //     return names.last
+    // })
+
+    // const sortLastNames = lastNamesList.sort()
+    // console.log(sortLastNames)
+
+    // we must split the names into parts
+    const array = people.sort((last, next) => {
+       let [alast, afirst] = last.split(', ');
+       let [blast, bfirst] =  next.split(', ');
+       return alast > blast ? 1 : -1;
+    })
+
+    console.log(array);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    //how many times have this word occurred in array?
+    // must loop through
+    // must hold data
+    // must compare string to previous string
+    // if string is not similar, don't add, otherwise do add
+
+    // const duplicates = [];
+
+    // const looping = data.map(item => item !==  )
+
+    // use reduce...
+
+    const vehicles = data.reduce((obj, item) => {
+        if (!obj[item]) {
+            obj[item] = 0
+        }
+        obj[item]++
+        return obj
+    }, {})
+
+    console.log("vehicles reduce function", vehicles)
+
